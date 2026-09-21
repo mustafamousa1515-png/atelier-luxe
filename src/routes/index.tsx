@@ -1,24 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import { HeroMark } from "@/components/hero-mark";
+import { Button } from "@/components/ui/button";
+import { site } from "@/lib/site-content";
+import black from "@/assets/editorial-black.jpg";
+import burgundy from "@/assets/editorial-burgundy.jpg";
+import craft from "@/assets/editorial-craft.jpg";
+export const Route=createFileRoute("/")({head:()=>({meta:[{title:"HURRIAMO — Private Fashion House"},{name:"description",content:"HURRIAMO is a private fashion house creating considered bespoke eveningwear, ceremonial dressing and personal wardrobes."},{property:"og:title",content:"HURRIAMO — Private Fashion House"},{property:"og:description",content:"Created in private. Considered in every line."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:Home});
+function Home(){return <><HeroMark/><section className="section-pad"><div className="editorial-grid"><div><p className="eyebrow">The house</p><h2 className="mt-7 font-display text-5xl leading-tight md:text-7xl">Clothing shaped around the person, never the spectacle.</h2></div><div className="self-end"><p className="text-lg leading-8 text-muted-foreground">HURRIAMO approaches dress as a private exchange. Each piece begins with listening, then moves through proportion, material and hand until it feels inevitable.</p><Button asChild variant="link" className="mt-5 h-auto p-0"><Link to="/house">Enter the house <ArrowRight/></Link></Button></div></div></section><section className="bg-secondary section-pad"><div className="mb-12 flex items-end justify-between"><div><p className="eyebrow">Selected expressions</p><h2 className="mt-5 font-display text-4xl md:text-6xl">A study in form</h2></div><Link to="/portfolio" className="hidden text-xs uppercase tracking-[0.16em] sm:block">View portfolio</Link></div><div className="grid gap-5 md:grid-cols-3"><EditorialImage src={black} title="Nocturne I"/><EditorialImage src={burgundy} title="Oxblood Study" shift/><EditorialImage src={craft} title="The Making"/></div></section><section className="section-pad"><p className="eyebrow">Private services</p><div className="mt-10 divide-y divide-border border-y border-border">{site.services.slice(0,3).map((s,i)=><Link key={s.title} to="/services" className="group grid gap-4 py-8 md:grid-cols-[80px_1fr_1fr] md:items-center"><span className="text-xs text-muted-foreground">0{i+1}</span><h3 className="font-display text-3xl md:text-4xl">{s.title}</h3><p className="max-w-md text-sm leading-6 text-muted-foreground">{s.text}</p></Link>)}</div></section><section className="bg-primary px-5 py-24 text-primary-foreground md:px-10 md:py-36"><div className="mx-auto max-w-5xl text-center"><p className="eyebrow text-primary-foreground/60">The first conversation</p><h2 className="mt-7 font-display text-5xl md:text-8xl">Begin in private.</h2><p className="mx-auto mt-6 max-w-lg text-primary-foreground/70">Request a quiet appointment to discuss the piece, the occasion, and the way you wish to feel.</p><Button asChild className="mt-9 rounded-none bg-background text-foreground hover:bg-background/85"><Link to="/appointment">Book an appointment</Link></Button></div></section></>}
+function EditorialImage({src,title,shift=false}:{src:string;title:string;shift?:boolean}){return <figure className={shift?"md:mt-24":""}><div className="overflow-hidden bg-muted"><img src={src} alt={`${title}, HURRIAMO editorial placeholder`} loading="lazy" width={1024} height={1408} className="aspect-[3/4] w-full object-cover transition-transform duration-700 hover:scale-[1.02]"/></div><figcaption className="mt-4 flex justify-between text-xs uppercase tracking-[0.16em]"><span>{title}</span><span className="text-muted-foreground">Editorial study</span></figcaption></figure>}
