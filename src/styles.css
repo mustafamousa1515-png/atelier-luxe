@@ -150,6 +150,44 @@
   ::selection { background: var(--primary); color: var(--primary-foreground); }
 }
 
+.global-mark-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 1400px;
+}
+
+.global-mark-motion {
+  --mark-x: 0;
+  --mark-y: 0;
+  --page-scroll: 0;
+  width: min(76vw, 880px);
+  aspect-ratio: 1;
+  opacity: 0.075;
+  transform-style: preserve-3d;
+  transform: translate3d(calc(var(--mark-x) * 34px), calc(var(--mark-y) * 24px), 0)
+    rotateX(calc(var(--mark-y) * -15deg))
+    rotateY(calc(var(--mark-x) * 18deg))
+    rotateZ(calc(var(--page-scroll) * 0.006deg));
+  transition: transform 240ms cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+}
+
+.global-mark-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: sepia(0.2) saturate(0.7);
+}
+
+header, main, footer { position: relative; }
+header { z-index: 50; }
+main, footer { z-index: 20; }
+
 @utility section-pad {
   width: 100%;
   max-width: 1600px;
@@ -175,17 +213,18 @@
 .hero-stage { height: 190vh; }
 .hero-sticky { position: sticky; top: 0; height: 100vh; min-height: 660px; overflow: hidden; perspective: 1200px; }
 .hero-mark-wrap { --p: var(--scroll, 0); position: absolute; left: 50%; top: 48%; width: min(55vw, 650px); aspect-ratio: 1; transform-style: preserve-3d; transform: translate(-50%,-50%) rotateX(calc(var(--p) * 34deg)) rotateY(calc(var(--p) * -42deg)) scale(calc(1 - var(--p) * .26)); }
-.hero-mark { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.05); transform: translateZ(18px); }
-.hero-mark-edge { position: absolute; inset: 4%; border: 1px solid color-mix(in oklab, var(--background) 25%, transparent); transform: translateZ(-18px); box-shadow: 0 35px 70px color-mix(in oklab, var(--background) 8%, transparent); }
+.hero-mark { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: contrast(1.05); transform: translateZ(18px); }
 
 @media (max-width: 767px) {
   .hero-stage { height: 120vh; }
   .hero-sticky { min-height: 600px; }
   .hero-mark-wrap { width: min(86vw, 470px); }
+  .global-mark-motion { width: min(118vw, 620px); opacity: 0.06; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .hero-stage { height: 100vh; }
   .hero-mark-wrap { transform: translate(-50%,-50%); }
+  .global-mark-motion { transform: none; transition: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
