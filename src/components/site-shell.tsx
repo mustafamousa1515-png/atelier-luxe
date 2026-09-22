@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import logo from "@/assets/hurriamo-mark-transparent.png";
+import logo from "@/assets/hurriamo-mark.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { site } from "@/lib/site-content";
 
@@ -16,7 +16,7 @@ export function SiteHeader() {
   return <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
     <div className="mx-auto flex h-20 max-w-[1600px] items-center justify-between px-5 md:px-10">
       <Link to="/" aria-label="HURRIAMO home" className="flex items-center gap-3">
-        <img src={logo} alt="" className="size-9 object-contain" />
+        <img src={logo.url} alt="" className="size-9 object-cover object-center" />
         <span className="font-display text-xl tracking-normal">HURRIAMO</span>
       </Link>
       <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
