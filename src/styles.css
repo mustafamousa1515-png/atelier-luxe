@@ -213,7 +213,7 @@ main, footer { z-index: 20; }
 .hero-stage { height: 190vh; }
 .hero-sticky { position: sticky; top: 0; height: 100vh; min-height: 660px; overflow: hidden; perspective: 1200px; }
 .hero-mark-wrap { --p: var(--scroll, 0); position: absolute; left: 50%; top: 48%; width: min(55vw, 650px); aspect-ratio: 1; transform-style: preserve-3d; transform: translate(-50%,-50%) rotateX(calc(var(--p) * 34deg)) rotateY(calc(var(--p) * -42deg)) scale(calc(1 - var(--p) * .26)); }
-.hero-mark { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: contrast(1.05); transform: translateZ(18px); }
+.hero-mark { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(0) saturate(100%); opacity: .88; transform: translateZ(18px); }
 
 @media (max-width: 767px) {
   .hero-stage { height: 120vh; }
