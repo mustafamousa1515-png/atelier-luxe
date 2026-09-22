@@ -5,3 +5,4 @@
 - [x] Add calendar download fallback and document skipped Google connection
 - [x] Add metadata, favicon, responsive motion, and accessibility
 - [ ] Verify desktop and mobile previews
+- [ ] Use the frameless transparent logo as a moving background across every page
